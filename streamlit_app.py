@@ -3,7 +3,7 @@ import pandas as pd
 from pymongo import MongoClient
 
 #Conexion MongoDB
-client = MongoClient('mongodb+srv://damons07:mNcsCwuuA8vYuxB9@prediccion2024.htxnzwm.mongodb.net/')
+client = MongoClient('mongodb+srv://DB_USERNAME:DB_PASSWORD@prediccion2024.htxnzwm.mongodb.net/')
 db = client.sample_geospatial
 collection = db.shipwrecks
 
