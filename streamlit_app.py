@@ -7,8 +7,15 @@ client = MongoClient("mongodb+srv://"+st.secrets["DB_USERNAME"]+":"+st.secrets["
 db = client.sample_geospatial
 collection = db.shipwrecks
 
-#Obtener datos dl colección
-df = pd.DataFrame(list(collection.find()))
+# Cachear la carga de recursos
+@st.cache_resource()
+# Cachear la creación del DataFrame con un tiempo de vida de caché de 60 segundos
+@st.cache_data(ttl=60)
+def cargar_datos_desde_mongodb():
+    #Obtener datos dl colección
+    return pd.DataFrame(list(collection.find()))
+
+df = cargar_datos_desde_mongodb()
 
 #opciones
 opciones = ["Sin limpieza", "Con limpieza"]
